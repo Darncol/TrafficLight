@@ -7,13 +7,62 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+final class ViewController: UIViewController {
+
+    @IBOutlet weak var redView: UIView!
+    @IBOutlet weak var yellowView: UIView!
+    @IBOutlet weak var greenView: UIView!
+
+    private var currentLightID = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
+        startConfiguration()
+        
+        turnOffLight()
     }
 
+    private func chekCurrentLightID() {
+        if currentLightID == 0 { currentLightID += 1 }
+        if currentLightID > 3 { currentLightID = 1}
+    }
 
+    private func startConfiguration() {
+        redView.layer.cornerRadius = redView.frame.size.width / 2
+        yellowView.layer.cornerRadius = yellowView.frame.size.width / 2
+        greenView.layer.cornerRadius = greenView.frame.size.width / 2
+    }
+
+    private func turnOffLight() {
+        redView.alpha = 0.3
+        yellowView.alpha = 0.3
+        greenView.alpha = 0.3
+    }
+
+    private func switchlight() {
+        switch currentLightID {
+        case 1:
+            redView.alpha = 1
+            currentLightID += 1
+        case 2:
+            yellowView.alpha = 1
+            currentLightID += 1
+        case 3:
+            greenView.alpha = 1
+            currentLightID += 1
+        default:
+            break
+        }
+    }
+
+    @IBAction func changeLight(_ sender: UIButton) {
+        sender.setTitle("Next", for: .normal)
+
+        chekCurrentLightID()
+
+        turnOffLight()
+
+        switchlight()
+    }
 }
-
