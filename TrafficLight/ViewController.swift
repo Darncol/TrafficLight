@@ -13,6 +13,8 @@ final class ViewController: UIViewController {
     @IBOutlet weak var yellowView: UIView!
     @IBOutlet weak var greenView: UIView!
 
+    
+    
     private var currentLightIndex = 0
 
     override func viewDidLoad() {
