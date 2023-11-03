@@ -13,44 +13,44 @@ final class ViewController: UIViewController {
     @IBOutlet weak var yellowView: UIView!
     @IBOutlet weak var greenView: UIView!
 
-    private var currentLightID = 0
+    private var currentLightIndex = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startConfiguration()
+        configureLightViews()
         
-        turnOffLight()
+        setLightsToInactiveState()
     }
 
-    private func chekCurrentLightID() {
-        if currentLightID == 0 { currentLightID += 1 }
-        if currentLightID > 3 { currentLightID = 1}
+    private func updateCurrentLightState() {
+        if currentLightIndex == 0 { currentLightIndex += 1 }
+        if currentLightIndex > 3 { currentLightIndex = 1 }
     }
 
-    private func startConfiguration() {
+    private func configureLightViews() {
         redView.layer.cornerRadius = redView.frame.size.width / 2
         yellowView.layer.cornerRadius = yellowView.frame.size.width / 2
         greenView.layer.cornerRadius = greenView.frame.size.width / 2
     }
 
-    private func turnOffLight() {
+    private func setLightsToInactiveState() {
         redView.alpha = 0.3
         yellowView.alpha = 0.3
         greenView.alpha = 0.3
     }
 
-    private func switchlight() {
-        switch currentLightID {
+    private func switchLight() {
+        switch currentLightIndex {
         case 1:
             redView.alpha = 1
-            currentLightID += 1
+            currentLightIndex += 1
         case 2:
             yellowView.alpha = 1
-            currentLightID += 1
+            currentLightIndex += 1
         case 3:
             greenView.alpha = 1
-            currentLightID += 1
+            currentLightIndex += 1
         default:
             break
         }
@@ -59,10 +59,10 @@ final class ViewController: UIViewController {
     @IBAction func changeLight(_ sender: UIButton) {
         sender.setTitle("Next", for: .normal)
 
-        chekCurrentLightID()
+        updateCurrentLightState()
 
-        turnOffLight()
+        setLightsToInactiveState()
 
-        switchlight()
+        switchLight()
     }
 }
