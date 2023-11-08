@@ -17,7 +17,7 @@ final class ViewController: UIViewController {
     @IBOutlet weak var yellowView: UIView!
     @IBOutlet weak var greenView: UIView!
     
-    private var currentLightIndex = 0
+    private var currentLightIndex = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,6 @@ final class ViewController: UIViewController {
     }
 
     private func updateCurrentLightState() {
-        if currentLightIndex == 0 { currentLightIndex += 1 }
         if currentLightIndex > 3 { currentLightIndex = 1 }
     }
 
