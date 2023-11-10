@@ -12,37 +12,41 @@
 import UIKit
 
 final class ViewController: UIViewController {
-
+    
     @IBOutlet weak var redView: UIView!
     @IBOutlet weak var yellowView: UIView!
     @IBOutlet weak var greenView: UIView!
     
     private var currentLightIndex = 1
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureLightViews()
-        
         setLightsToInactiveState()
     }
-
-    private func updateCurrentLightState() {
-        if currentLightIndex > 3 { currentLightIndex = 1 }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        configureLightViews()
     }
-
+    
+    private func updateCurrentLightState() {
+        if currentLightIndex > 3 {
+            currentLightIndex = 1
+        }
+    }
+    
     private func configureLightViews() {
         redView.layer.cornerRadius = redView.frame.size.width / 2
         yellowView.layer.cornerRadius = yellowView.frame.size.width / 2
         greenView.layer.cornerRadius = greenView.frame.size.width / 2
     }
-
+    
     private func setLightsToInactiveState() {
         redView.alpha = 0.3
         yellowView.alpha = 0.3
         greenView.alpha = 0.3
     }
-
+    
     private func switchLight() {
         switch currentLightIndex {
         case 1:
@@ -58,14 +62,12 @@ final class ViewController: UIViewController {
             break
         }
     }
-
+    
     @IBAction func changeLight(_ sender: UIButton) {
         sender.setTitle("Next", for: .normal)
-
+        
         updateCurrentLightState()
-
         setLightsToInactiveState()
-
         switchLight()
     }
 }
